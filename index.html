@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>情绪控制</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 开始游戏界面 -->
+    <div class="start-screen" id="start-screen">
+        <div class="start-content">
+            <h1 class="game-title">电梯<span class="highlight">Massage</span></h1>
+            <div class="game-rules">
+                <h2>游戏规则</h2>
+                <p>你是一台会对乘客进行心理按摩的黑科技电梯！</p>
+                <ul>
+                    <li>点击那些消极的想法，消除它们，让员工们打起精神来吧！</li>
+                    <li>公司改变世界的伟业，需要你的帮助！</li>
+                </ul>
+            </div>
+            <button id="main-start-button" class="main-start-button">开门</button>
+        </div>
+    </div>
+
+    <!-- 结算界面 -->
+    <div class="summary-screen" id="summary-screen" style="display: none;">
+        <div class="summary-content">
+            <h1 class="summary-title">游戏结束</h1>
+            <div class="summary-results">
+                <h2>本周工作表现</h2>
+                <div class="results-container" id="results-container">
+                    <!-- 结果将在这里动态生成 -->
+                </div>
+            </div>
+            <button id="restart-game-button" class="main-start-button">重新开始</button>
+        </div>
+    </div>
+
+    <div class="game-background">
+        <div class="images-container">
+            <img src="artRes/bg.png" alt="电梯背景" class="background-image">
+            <img src="artRes/body_male.png" alt="上班族" class="character-image">
+            <img id="emotion-image" class="emotion-image" style="display: none;">
+            
+            <!-- 游戏UI覆盖层 -->
+            <div class="game-ui">
+                <!-- 电梯楼层显示 -->
+                <div class="elevator-container">
+                    <div class="elevator-shaft">
+                        <div class="elevator-floor-marker" id="elevator-current-floor">1F</div>
+                        <div class="elevator-progress-container">
+                            <div class="elevator-progress" id="elevator-progress"></div>
+                        </div>
+                        <div class="elevator-floor-labels">
+                            <div class="elevator-floor top">15F 公司</div>
+                            <div class="elevator-floor bottom">1F</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 保留按钮但默认隐藏，用于可能的后续修改 -->
+                <button id="restart-button" style="display: none;">下一轮</button>
+
+                <!-- 新增：底部状态栏 -->
+                <div class="bottom-status-bar">
+                    <div class="status-row">
+                        <div class="game-progress" id="game-progress">
+                            <div class="round-counter">第 <span id="current-round">1</span>/<span id="total-rounds">5</span> 位</div>
+                        </div>
+                        <div class="character-name" id="character-name">Name</div>
+                        <div class="emotion-event" id="emotion-event">今天工作很累</div>
+                    </div>
+                    
+                    <div class="status-bar">
+                        <div class="progress-bar">
+                            <div class="progress" id="mood-progress"></div>
+                            <div class="status-text">工作状态: <span class="status-value">50%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 游戏区域，用于生成气泡 -->
+            <div class="game-area">
+                <!-- 气泡将在这里动态生成 -->
+            </div>
+            
+            <div class="game-message" id="game-message"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
