@@ -777,17 +777,29 @@ function showGameResults() {
     // 清空之前的结果
     resultsContainer.innerHTML = '';
     
-    // 为每轮游戏添加结果项
+    // 计算总体成功率
+    const totalRounds = gameState.roundResults.length;
+    const successRounds = gameState.roundResults.filter(result => result.success).length;
+    const successRate = Math.round((successRounds / totalRounds) * 100);
+    
+    // 添加总体成功率
+    const summaryHeader = document.createElement('div');
+    summaryHeader.className = 'result-summary';
+    summaryHeader.innerHTML = `<div>本周成功率: <span class="${successRate >= 60 ? 'success' : 'fail'}">${successRate}%</span></div>`;
+    resultsContainer.appendChild(summaryHeader);
+    
+    // 为每轮游戏添加更紧凑的结果项
     gameState.roundResults.forEach(result => {
         const resultItem = document.createElement('div');
         resultItem.className = 'result-item';
         
         const statusClass = result.success ? 'success' : 'fail';
-        const statusText = result.success ? '状态良好' : '状态不佳';
+        const statusText = result.success ? '良好' : '不佳';
+        const emotion = result.emotion ? `(${result.emotion === 'anger' ? '愤怒' : result.emotion === 'sadness' ? '悲伤' : '恐惧'})` : '';
         
         resultItem.innerHTML = `
-            <div class="name">第${result.round}天 - ${result.name}</div>
-            <div class="status ${statusClass}">${statusText} (${result.workMoodValue}%)</div>
+            <div class="name">第${result.round}天: ${result.name} ${emotion}</div>
+            <div class="status ${statusClass}">${statusText} ${result.workMoodValue}%</div>
         `;
         
         resultsContainer.appendChild(resultItem);
